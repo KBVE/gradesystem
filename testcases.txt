@@ -1,0 +1,26 @@
+Test case 1: 
+MAIN -> 
+
+insertGrade(1,0,100);
+		insertGrade(1,1,83);
+		insertGrade(2,0,89);
+		insertGrade(2,1,100);
+		insertGrade(2,3,81);
+		// fetchGrades / fetchAverage for the testGrade
+		fetchGrades(1);
+		fetchAverage(2);
+		removeGrade(2, 2);
+		fetchAverage(2);
+
+OUTPUT ->
+StudentID was not in the system... automatically inserting
+Grade as been inserted
+StudentID was not in the system... automatically inserting
+Grade as been inserted
+Grade as been inserted
+0 = Student ID : [1] TestID: [0] Grade: [100]
+1 = Student ID : [1] TestID: [1] Grade: [83]
+StudentID 2 : Average => 90
+Student: 2 has no records of 2
+StudentID 2 : Average => 90
+
