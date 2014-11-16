@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Scanner;
 
 /**
  *  GradeMap was suppose to be a simple hashmap / array list combo but it seems that the concept does not scale, 
@@ -160,6 +161,32 @@ public class GradeMap {
 	}
 	
 	
+	public static Integer getAverage(int studentID)
+	{
+		int temp_test = 0;
+		int temp_total = 0;
+		// Checks if the student is in the system, if null, then system.out that he is not there.
+		if(GradeData.get(studentID) == null)
+		{
+			System.out.println("The student is not in the system");
+		}
+		else
+		{
+			//ArrayList<Grade> temp = GradeData.get(studentID);
+			Iterator<Entry<Integer, Grade>> it = GradeData.get(studentID).entrySet().iterator();
+		    while (it.hasNext()) {
+		    	 Map.Entry pairs = (Map.Entry)it.next();
+		       // System.out.println(pairs.getKey() + " = " + pairs.getValue());
+		        temp_test++;
+		    	temp_total = temp_total + ((Grade)pairs.getValue()).getgrade();
+		        //it.remove(); // avoids a ConcurrentModificationException
+		    }
+		    return temp_total/temp_test;
+		  //  System.out.println("StudentID " + studentID + " : Average => " + temp_total/temp_test);
+		}
+		return -1;
+	}
+	
 	public static int getScore(int studentID, int testID)
 	{
 		if(GradeData.get(studentID) == null)
@@ -234,15 +261,68 @@ public class GradeMap {
 		return null;
 		
 	}
+	public static void displayMenu()
+	{
+		System.out.println("Menu (Press 0)");
+		System.out.println("Press 1 to insert grade: Format: (studentid, testid, grade)");
+		System.out.println("Press 2 to fetch average: Format: (studentID)");
+		System.out.println("Press 3 to remove grade Format: (studentid, testid)");
+		System.out.println("Press 6+ to exit");
+		
+	}
+	
+	@SuppressWarnings("resource")
+	public static Boolean AddGradeSir()
+	{
+		int studentID, testID, gradeID;
+		Scanner aScanner = new Scanner(System.in);
+		System.out.println("Welcome to Grade Submissions");
+		System.out.println("What was the studentID? ");
+		studentID = aScanner.nextInt();
+		System.out.println("What was the testID ");
+		testID = aScanner.nextInt();
+		System.out.println("What was the grade? ");
+		gradeID = aScanner.nextInt();
+		if(insertGrade(studentID,testID,gradeID))
+		{
+			fetchGrades(studentID);
+			return true;
+		}
+		return false;
+		
+	}
 	
 	public static void main(String [] args)
 	{
 	// Lets do some basic debuging
 	// Insert 2 tests and fetch user
-
-	insertGrade(1,1,100);
-	System.out.println(score2letter(getScore(1,1)));
-	
-		
+		int studentID = 0;
+		int menuoption = 0;
+		Scanner aScanner = new Scanner(System.in);
+		while(menuoption < 6)
+		{
+			
+			if(menuoption == 0)
+			{
+				displayMenu();
+			}
+		  	if(menuoption == 1)
+		  	{
+		  		AddGradeSir();
+		  		displayMenu();
+		  	}
+		  	if(menuoption == 2)
+		  	{
+		  		System.out.println("What is the studentID?");
+		  		studentID = aScanner.nextInt();
+		  		fetchAverage(studentID);
+		  		System.out.println(score2letter(getAverage(studentID)));
+		  		displayMenu();
+		  	}
+			menuoption = aScanner.nextInt();
+		//	menuoption = System.in.read();
+			
+		}
+		System.out.println("Thanks for using GradeMap! Bye!");
 	}
 }
