@@ -1,4 +1,5 @@
 ///import java.util.ArrayList;
+import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -185,14 +186,40 @@ public class GradeMap {
 		
 	}
 	
-	public Boolean removeGrade(int studentID, int testID)
+	// This method returns true or false based on the removal of the testID from the personal Hashmap for the studentID
+	
+	public static Boolean removeGrade(int studentID, int testID)
 	{
+		// Checks if the student is in the GradeData Map
+		
 		if(GradeData.get(studentID) == null)
 		{
+		//StudentID's Personal Grade map was not in the system.
 		  System.out.println("StudentID's Personal Grade map was not in the system.");
-			
+		  return false;
 		}
-		return false;
+		else
+		{
+		// If the student is in the map, check if they have taken the test.
+			if(!GradeData.get(studentID).containsKey(testID))
+			{
+				System.out.println("Student: "+studentID + " has no records of " + testID);
+				return false;
+			}
+			else
+			{
+				GradeData.get(studentID).remove(testID);
+				System.out.println("Removed " + testID +  " from StudentID " + studentID);
+				return true;
+			}
+		}
+		//return false;
+		
+	}
+	
+	public Array getArray(int studentID)
+	{
+		return null;
 		
 	}
 	
@@ -223,7 +250,11 @@ public class GradeMap {
 		insertGrade(1,1,83);
 		insertGrade(2,0,89);
 		insertGrade(2,1,100);
+		insertGrade(2,3,81);
+		// fetchGrades / fetchAverage for the testGrade
 		fetchGrades(1);
+		fetchAverage(2);
+		removeGrade(2, 2);
 		fetchAverage(2);
 		
 	}
