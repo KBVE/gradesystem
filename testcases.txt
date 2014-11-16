@@ -87,3 +87,39 @@ StudentID 2 : Average => 90
 Removed 1 from StudentID 2
 StudentID 2 : Average => 85
 StudentID 3 : Average => 91
+
+
+TEST CASE 3
+
+Menu (Press 0)
+Press 1 to insert grade: Format: (studentid, testid, grade)
+Press 2 to fetch average: Format: (studentID)
+Press 3 to remove grade Format: (studentid, testid)
+Press 6+ to exit
+1
+Welcome to Grade Submissions
+What was the studentID? 
+1
+What was the testID 
+1
+What was the grade? 
+100
+StudentID was not in the system... automatically inserting
+1 = Student ID : [1] TestID: [1] Grade: [100]
+Menu (Press 0)
+Press 1 to insert grade: Format: (studentid, testid, grade)
+Press 2 to fetch average: Format: (studentID)
+Press 3 to remove grade Format: (studentid, testid)
+Press 6+ to exit
+2
+What is the studentID?
+1
+StudentID 1 : Average => 100
+A
+Menu (Press 0)
+Press 1 to insert grade: Format: (studentid, testid, grade)
+Press 2 to fetch average: Format: (studentID)
+Press 3 to remove grade Format: (studentid, testid)
+Press 6+ to exit
+7
+Thanks for using GradeMap! Bye!
