@@ -133,6 +133,32 @@ public class GradeMap {
 		}
 	}
 	
+	@SuppressWarnings({ "unused", "rawtypes" })
+	public static void fetchAverage(int studentID)
+	{
+		int temp_test = 0;
+		int temp_total = 0;
+		// Checks if the student is in the system, if null, then system.out that he is not there.
+		if(GradeData.get(studentID) == null)
+		{
+			System.out.println("The student is not in the system");
+		}
+		else
+		{
+			//ArrayList<Grade> temp = GradeData.get(studentID);
+			Iterator<Entry<Integer, Grade>> it = GradeData.get(studentID).entrySet().iterator();
+		    while (it.hasNext()) {
+		    	 Map.Entry pairs = (Map.Entry)it.next();
+		       // System.out.println(pairs.getKey() + " = " + pairs.getValue());
+		        temp_test++;
+		    	temp_total = temp_total + ((Grade)pairs.getValue()).getgrade();
+		        //it.remove(); // avoids a ConcurrentModificationException
+		    }
+		    System.out.println("StudentID " + studentID + " : Average => " + temp_total/temp_test);
+		}
+	}
+	
+	
 	public static int getScore(int studentID, int testID)
 	{
 		if(GradeData.get(studentID) == null)
@@ -174,7 +200,7 @@ public class GradeMap {
 	{
 	// Lets do some basic debuging
 	// Insert 2 tests and fetch user
-
+/**
 		System.out.println("<----------------------------->");
 		System.out.println("<----------------------------->");
 	System.out.println("Insert 2 tests and fetch that user's score...");
@@ -190,6 +216,15 @@ public class GradeMap {
 	System.out.println("It returns the error that the student wasnt in the system, since we did not add him.");
 	System.out.println("<----------------------------->");
 	System.out.println("<----------------------------->");
-
+	
+**/
+	// insertGrade(studentID, testID, grade)
+		insertGrade(1,0,100);
+		insertGrade(1,1,83);
+		insertGrade(2,0,89);
+		insertGrade(2,1,100);
+		fetchGrades(1);
+		fetchAverage(2);
+		
 	}
 }
