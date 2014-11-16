@@ -217,6 +217,18 @@ public class GradeMap {
 		
 	}
 	
+	// Simple function to convert an integer to a Letter (char)
+	
+	public static char score2letter(int score) {   
+		   char result;
+		   if (score >= 90) { result = 'A'; }
+		   else if (score >= 80) { result = 'B'; }
+		   else if (score >= 70) { result = 'C'; }
+		   else if (score >= 60) { result = 'D'; }
+		   else { result = 'F'; }
+		   return result;
+		}
+	
 	public Array getArray(int studentID)
 	{
 		return null;
@@ -227,35 +239,10 @@ public class GradeMap {
 	{
 	// Lets do some basic debuging
 	// Insert 2 tests and fetch user
-/**
-		System.out.println("<----------------------------->");
-		System.out.println("<----------------------------->");
-	System.out.println("Insert 2 tests and fetch that user's score...");
-	  insertGrade(1, 0, 100);
-	  insertGrade(1, 1, 100);
-	  fetchGrades(1);
 
-		System.out.println("<----------------------------->");
-	System.out.println("<----------------------------->");
+	insertGrade(1,1,100);
+	System.out.println(score2letter(getScore(1,1)));
 	
-	System.out.println("Lets fetch a score with student ID of 2");
-	  fetchGrades(2);
-	System.out.println("It returns the error that the student wasnt in the system, since we did not add him.");
-	System.out.println("<----------------------------->");
-	System.out.println("<----------------------------->");
-	
-**/
-	// insertGrade(studentID, testID, grade)
-		insertGrade(1,0,100);
-		insertGrade(1,1,83);
-		insertGrade(2,0,89);
-		insertGrade(2,1,100);
-		insertGrade(2,3,81);
-		// fetchGrades / fetchAverage for the testGrade
-		fetchGrades(1);
-		fetchAverage(2);
-		removeGrade(2, 2);
-		fetchAverage(2);
 		
 	}
 }
